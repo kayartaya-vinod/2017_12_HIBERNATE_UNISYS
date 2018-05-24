@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hibernate.training.entity">
+	<class name="Category" table="categories">
+		<id name="id" column="id" />
+		<property name="name" column="name" />
+		
+		<!-- When a single category is retrieved, compare that id with
+		"products.category_id", get all rows, convert them into Product instances,
+		and give it in the form of a Set<Product> -->
+		<set name="products" cascade="save-update">
+			<key column="category_id" /><!-- foreign key in the products table  -->
+			<one-to-many class="Product" />
+		</set>
+	</class>
+
+</hibernate-mapping>
+
+
